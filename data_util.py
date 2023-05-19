@@ -1,7 +1,9 @@
 import torch
 
+FILENAME = "data/articles.txt"
+
 # read and prepare the articles
-with open("articles.txt", "r", encoding="utf-8") as f:
+with open(FILENAME, "r", encoding="utf-8") as f:
     articles = []
     for line in f:
         articles.append(line)

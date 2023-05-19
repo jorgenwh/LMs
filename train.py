@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from data_util import get_batch, vocab_size, decode
-from models import LSTM
+from lstm import LSTM
 
 #torch.manual_seed(1337)
 
@@ -16,7 +16,7 @@ TRAIN_ITERS = 1000
 
 
 if __name__ == "__main__":
-    m = LSTM(input_size=vocab_size, embedding_size=1024, hidden_size=1024, output_size=vocab_size)
+    m = LSTM(input_size=vocab_size, output_size=vocab_size)
     m = m.to(device)
     optimizer = torch.optim.AdamW(m.parameters(), lr=LEARNING_RATE)
     losses = deque(maxlen=1000)
@@ -35,4 +35,4 @@ if __name__ == "__main__":
         optimizer.step()
 
         if i % 1000 == 0 or i == TRAIN_ITERS - 1:
-            torch.save(m.state_dict(), "models/model{i}.pt")
+            torch.save(m.state_dict(), f"models/model{i}.pt")
